@@ -133,16 +133,30 @@ def is_all_banned(access_token, vk_username):
     cb5 = False
 
     # первый бот
-    a_request = requests.get('https://api.vk.com/method/messages.getHistory', params={
+
+    # a_request = requests.get('https://api.vk.com/method/messages.getHistory', params={
+    #     'v': 5.124,
+    #     'peer_id': -140876144,
+    #     'access_token': access_token,
+    #     'count': 10
+    # }).json()
+    # for item in a_request['response']['items']:
+    #     if item['from_id'] == -140876144:
+    #         cb1 = False
+    #         break
+    # data['cb1'] = cb1
+
+    r = requests.get('https://api.vk.com/method/messages.getHistory', params={
         'v': 5.124,
         'peer_id': -140876144,
         'access_token': access_token,
-        'count': 10
+        'count': 1
     }).json()
-    for item in a_request['response']['items']:
-        if item['from_id'] == -140876144:
-            cb1 = False
-            break
+    message_text = r['response']['items'][0]['text']
+    if 'решить капчу' in message_text:
+        cb1 = True
+    else:
+        cb2 = False
     data['cb1'] = cb1
 
     # второй бот
