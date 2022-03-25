@@ -1,9 +1,9 @@
 type,acc_id,login_pass,token,vk_id,username
-cb_vkusno,0,ionutbaciu7@gmail.com:pass_WORD200,c83003919e93037c3a17daf327b699a745d240627afffb0f94e3c9672264578d62272878437ecbbc24aa9,542298952,Crypto Aragon
-cb_vkusno,1,gustavo_delfito@hotmail.com.br:pass_WORD200,d7b803732f837b442009f3ef35ae6e2d91ca80f71ae97612627893bf14de0c31bc5b9aef9db50ceec0deb,320562058,Gustavo Lima
-cb_vkusno,2,bartosz.abedi@gmail.com:pass_WORD200,df38fd6f7425f8c04e0bf8a5fcbe70750f6be68867cbebd816ccb0b985a689147d6d872ca9b76823eb63d,478496853,Bartosz Abedi
-cb_vkusno,3,madmanwithpie@gmail.com:pass_WORD200,2e40079903fef852924593dafd4982e85cf542fa54fd5f014a785324644f6c490efafb87fdb1050f46386,567907564,Markus Eliassen
-cb_vkusno,4,aleksanderarup@gmail.com:pass_WORD200,f109b75034cc86240ece656ba6522e51f4f82c040963e6cd02c0fc84c826c725716b6f9d2bcf1731c22c6,499383720,Alex Ander
+cb_vkusno,0,
+cb_vkusno,1,
+cb_vkusno,2,
+cb_vkusno,3,
+cb_vkusno,4,
 cb_vkusno,5,
 cb_vkusno,6,
 cb_vkusno,7,
