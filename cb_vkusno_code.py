@@ -36,7 +36,7 @@ def send_anon_cb1(address, access_token, vk_username):
         'access_token': access_token,
         'count': 1
     }).json()
-    if 'error' in r:
+    if 'error' in r and r['error']['error_code'] == 5:
         send_debug(vk_username + '\n' + 'похоже, что акк отлетел')
         time.sleep(15*60)
     else:
