@@ -330,9 +330,9 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
                     if not cb5_ban and random_rate(50):
                         send_anon_cb5(address, access_token, vk_username) # Овсянка, сэр!
                     cycles += 1
-            except:
+            except Exception as e:
                 time.sleep(1)
-                print('\n\n\nСлучилась какая-то ошибка. Я не знаю, что за ошибка, но я продолжу работать.\n\n\n')
+                print(f'ERROR:\n-----\n{str(e)}\n-----')
         else:
             print('Токена нет, сплю...')
             time.sleep(5*60)
