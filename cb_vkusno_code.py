@@ -7,6 +7,7 @@ from random import randint
 import pandas
 import os
 
+# отправка сообщения
 def send_message(text, peer_id, access_token, username): # функция для отправки сообщений в вк
     random_id = random.randint(100000, 1000000000)
     r = requests.get('https://api.vk.com/method/messages.send', params={
@@ -19,6 +20,7 @@ def send_message(text, peer_id, access_token, username): # функция для
     if 'error' in r and r['error']['error_code'] == 14:
         time.sleep(5*60)
 
+# откладка через группу вк
 def send_debug(text):
     random_id = random.randint(100000, 1000000000)
     r = requests.get('https://api.vk.com/method/messages.send', params={
@@ -29,31 +31,23 @@ def send_debug(text):
         'random_id': random_id
     }).json()
 
+# чат №1
 def send_anon_cb1(address, access_token, vk_username):
-    r = requests.get('https://api.vk.com/method/messages.getHistory', params={
-        'v': 5.124,
-        'peer_id': -140876144,
-        'access_token': access_token,
-        'count': 1
-    }).json()
-    if 'error' in r and r['error']['error_code'] == 5:
-        send_debug(vk_username + '\n' + 'похоже, что акк отлетел')
-        time.sleep(15*60)
-    else:
-        peer_id = -140876144
-        send_message('!c', peer_id, access_token, vk_username)
-        time.sleep(2)
-        send_message('!н', peer_id, access_token, vk_username)
+    peer_id = -140876144
+    send_message('!c', peer_id, access_token, vk_username)
+    time.sleep(2)
+    send_message('!н', peer_id, access_token, vk_username)
+    time.sleep(2)
+
+    # делаем сообщения и пишем их
+    msg_list = gen_cb_msgs(address)
+    for msg in msg_list:
+        send_message(msg, peer_id, access_token, vk_username)
         time.sleep(2)
 
-        # делаем сообщения и пишем их
-        msg_list = gen_cb_msgs(address)
-        for msg in msg_list:
-            send_message(msg, peer_id, access_token, vk_username)
-            time.sleep(2)
+    time.sleep(5)
 
-        time.sleep(5)
-
+# чат №2
 def send_anon_cb2(address, access_token, vk_username):
     peer_id = -190262367
     send_message('!стоп', peer_id, access_token, vk_username)
@@ -69,6 +63,7 @@ def send_anon_cb2(address, access_token, vk_username):
 
     time.sleep(5)
 
+# чат №3
 def send_anon_cb3(address, access_token, vk_username):
     peer_id = -132834409
     r = requests.get('https://api.vk.com/method/messages.getHistory', params={
@@ -94,6 +89,7 @@ def send_anon_cb3(address, access_token, vk_username):
 
     time.sleep(5)
 
+# чат №4
 def send_anon_cb4(address, access_token, vk_username):
     peer_id = -71729358
     send_message('!стоп', peer_id, access_token, vk_username)
@@ -109,6 +105,7 @@ def send_anon_cb4(address, access_token, vk_username):
 
     time.sleep(5)
 
+# чат №5
 def send_anon_cb5(address, access_token, vk_username):
     peer_id = -66678575
     send_message('!стоп', peer_id, access_token, vk_username)
@@ -124,6 +121,7 @@ def send_anon_cb5(address, access_token, vk_username):
 
     time.sleep(5)
 
+# чекаем бан ботов
 def is_all_banned(access_token, vk_username):
     data = {'cb1': False, 'cb2': False, 'cb3': False, 'cb4': False, 'cb5': False}
     cb1 = True
@@ -133,19 +131,6 @@ def is_all_banned(access_token, vk_username):
     cb5 = False
 
     # первый бот
-
-    # a_request = requests.get('https://api.vk.com/method/messages.getHistory', params={
-    #     'v': 5.124,
-    #     'peer_id': -140876144,
-    #     'access_token': access_token,
-    #     'count': 10
-    # }).json()
-    # for item in a_request['response']['items']:
-    #     if item['from_id'] == -140876144:
-    #         cb1 = False
-    #         break
-    # data['cb1'] = cb1
-
     r = requests.get('https://api.vk.com/method/messages.getHistory', params={
         'v': 5.124,
         'peer_id': -140876144,
@@ -206,15 +191,9 @@ def is_all_banned(access_token, vk_username):
             cb5 = True
     data['cb5'] = cb5
 
-    fulldata = f'{vk_username} \nя забанен \ncb1: {cb1} \ncb3: {cb3}'
-
-    # проверяем на бан
-    if cb1 or cb3:
-        #send_debug(fulldata)
-        pass
-
     return data
 
+# рандомный процент для спама
 def random_rate(rate):
     value = random.randint(0, 100)
     if value < rate:
@@ -222,6 +201,7 @@ def random_rate(rate):
     else:
         return True
 
+# читаем ссылку на тг
 def read_name():
     try:
         file = open('cb_name.txt', 'r')
@@ -231,6 +211,7 @@ def read_name():
         name = None
     return name
 
+# делаем заглавной с 50% шансом
 def random_capitalize(text):
     a = random.randint(0, 1)
     if a == 0:
@@ -238,6 +219,7 @@ def random_capitalize(text):
     else:
         return text
 
+# генерим сообщение
 def gen_cb_msgs(address):
     hi = random.choice(['привет', 'прив)', 'здравствуй', 'привки', 'привет, как зовут?', 'привет, д17'])
     smth = random.choice(['хочешь скину интимки школьниц?', 'есть кое-что 18+) показать?',
@@ -250,46 +232,18 @@ def gen_cb_msgs(address):
     msg_list = [random_capitalize(hi), random_capitalize(smth), random_capitalize(search + ' ' + channel)]
     return msg_list
 
-def gen_cb_msg():
-    a = random.choice(['сллив', 'слииваем', 'ссливы'])
-    b = random.choice(['голых', 'обнажённых', 'раздетых', 'пошлых'])
-    c = random.choice(['школьниц', 'малолеток'])
-    d = random.choice(['ищи в', 'пиши в'])
-    e = random.choice(['теелеграмме', 'теллеграме'])
-    emoji = random.choice(['❤', '😉', '💔', '🌈', '🔥', '💦', '🍒'])
+# чекаем акк
+def acc_check(access_token):
+    r = requests.get('https://api.vk.com/method/users.get', params={
+        'v': 5.124,
+        'access_token': access_token
+    }).json()
+    if 'error' in r and r['error']['error_code'] == 5:
+        return False
+    else:
+        return True
 
-    a = spacing(a)
-    b = unicalize_text(b)
-    c = unicalize_text(c)
-    d = unicalize_text(d)
-    e = spacing(unicalize_text(e))
-
-    msg = f'{a} {b} {c} {emoji} \n{d} {e}'
-    return msg
-
-def spacing(text):
-    space_index = random.randint(2, 3)
-    result = text[:space_index] + ' ' + text[space_index:]
-
-    return result
-
-def unicalize_text(text):
-    length = len(text)
-
-    # повторы
-    slice_index = random.randint(0, int(length/2))
-    slice_length = 1
-
-    repeated = text[:slice_index] + text[slice_index:slice_index+slice_length] + text[slice_index:]
-
-    # добавляем рандом буквы (не юзается, но оставим)
-    # letter = random.choice(['ы', 'ь', 'ъ', 'э', 'ц'])
-    # letter_index = random.randint(1, 3)
-    # lettered = repeated[:letter_index] + letter + repeated[letter_index:]
-
-    result = repeated
-    return result
-
+# спамим
 def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для перезалива)
     cycles = 4
     cb1_ban = False
@@ -309,34 +263,40 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
 
         address = read_name()
         if access_token != 'nan' and address != None:
-            try:
-                if cycles > 6:
-                    cycles = 0
-                    ban_data = is_all_banned(access_token=access_token, vk_username=vk_username)
-                    cb1_ban = ban_data['cb1']
-                    cb2_ban = ban_data['cb2']
-                    cb3_ban = ban_data['cb3']
-                    cb4_ban = ban_data['cb4']
-                    cb5_ban = ban_data['cb5']
-                else:
-                    if not cb1_ban:
-                        send_anon_cb1(address, access_token, vk_username) # Анонимный чат ВКонтакте
-                    if not cb2_ban:
-                        send_anon_cb2(address, access_token, vk_username) # Анонимный чат бот
-                    if not cb3_ban:
-                        send_anon_cb3(address, access_token, vk_username) # Студентки | Чат
-                    if not cb4_ban and random_rate(50):
-                        send_anon_cb4(address, access_token, vk_username) # ПОЗОРシ
-                    if not cb5_ban and random_rate(50):
-                        send_anon_cb5(address, access_token, vk_username) # Овсянка, сэр!
-                    cycles += 1
-            except Exception as e:
-                time.sleep(1)
-                print(f'ERROR:\n-----\n{str(e)}\n-----')
+            if not acc_check(access_token=access_token):
+                send_debug(vk_username + '\n' + 'похоже, что акк отлетел')
+                time.sleep(15 * 60)
+            else:
+                try:
+                    if cycles > 6:
+                        cycles = 0
+                        ban_data = is_all_banned(access_token=access_token, vk_username=vk_username)
+                        cb1_ban = ban_data['cb1']
+                        cb2_ban = ban_data['cb2']
+                        cb3_ban = ban_data['cb3']
+                        cb4_ban = ban_data['cb4']
+                        cb5_ban = ban_data['cb5']
+                    else:
+                        if not cb1_ban and random_rate(20):
+                            send_anon_cb1(address, access_token, vk_username) # Анонимный чат ВКонтакте
+                        if not cb2_ban:
+                            send_anon_cb2(address, access_token, vk_username) # Анонимный чат бот
+                        if not cb3_ban:
+                            send_anon_cb3(address, access_token, vk_username) # Студентки | Чат
+                        if not cb4_ban and random_rate(50):
+                            send_anon_cb4(address, access_token, vk_username) # ПОЗОРシ
+                        if not cb5_ban and random_rate(50):
+                            send_anon_cb5(address, access_token, vk_username) # Овсянка, сэр!
+                        cycles += 1
+
+                except Exception as e:
+                    time.sleep(1)
+                    print(f'ERROR:\n-----\n{str(e)}\n-----')
         else:
             print('Токена нет, сплю...')
             time.sleep(5*60)
 
+# мэйн функтион
 def main():
     # число потоков
     acc_data = pandas.read_csv('https://raw.githubusercontent.com/colorfulpaintofapriltoday/data/main/vk1.csv')
