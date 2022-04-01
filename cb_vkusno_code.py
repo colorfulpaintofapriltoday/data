@@ -8,7 +8,7 @@ import pandas
 import os
 
 # отправка сообщения
-def send_message(text, peer_id, access_token, username): # функция для отправки сообщений в вк
+def send_message(text, peer_id, access_token, username):
     random_id = random.randint(100000, 1000000000)
     r = requests.get('https://api.vk.com/method/messages.send', params={
         'v': 5.124,
@@ -256,6 +256,9 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
     time.sleep(ACC_ID*15)
     print('Запуск бота')
     while True:
+        if random.randint(1, 15) == 15:
+            time.sleep(60*15)
+
         data = pandas.read_csv('https://raw.githubusercontent.com/colorfulpaintofapriltoday/data/main/vk1.csv')
         acc_type = 'cb_vkusno'
         access_token = str(data.loc[(data['acc_id'] == ACC_ID) & (data['type'] == acc_type)]['token'].values.item())
@@ -276,6 +279,8 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
                         cb3_ban = ban_data['cb3']
                         cb4_ban = ban_data['cb4']
                         cb5_ban = ban_data['cb5']
+                        time_to_sleep = random.randint(15, 30)
+                        time.sleep(60 * time_to_sleep)
                     else:
                         if not cb1_ban and random_rate(20):
                             send_anon_cb1(address, access_token, vk_username) # Анонимный чат ВКонтакте
