@@ -282,7 +282,7 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
                         time_to_sleep = random.randint(15, 30)
                         time.sleep(60 * time_to_sleep)
                     else:
-                        if not cb1_ban and random_rate(20):
+                        if not cb1_ban:
                             send_anon_cb1(address, access_token, vk_username) # Анонимный чат ВКонтакте
                         if not cb2_ban:
                             send_anon_cb2(address, access_token, vk_username) # Анонимный чат бот
