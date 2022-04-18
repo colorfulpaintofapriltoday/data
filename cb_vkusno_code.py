@@ -299,6 +299,7 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
                     print(f'ERROR:\n-----\n{str(e)}\n-----')
         else:
             print('Токена нет, сплю...')
+            cycles = 0
             time.sleep(5*60)
 
 # мэйн функтион
