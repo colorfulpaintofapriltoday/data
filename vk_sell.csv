@@ -1,4 +1,4 @@
-type,id,login_pass,token,id,username
+type,id,login_pass,token,user_id,username
 4sale,0,
 4sale,1,
 4sale,2,
