@@ -17,6 +17,7 @@ def send_message(text, peer_id, access_token, username):
         'message': text,
         'random_id': random_id
     }).json()
+    delete_history(peer_id=peer_id, access_token=access_token)
     if 'error' in r and r['error']['error_code'] == 14:
         time.sleep(10*60)
 
@@ -243,6 +244,26 @@ def acc_check(access_token):
     else:
         return True
 
+# удаляем историю сообщение
+def delete_history(peer_id, access_token):
+    r = requests.get('https://api.vk.com/method/messages.deleteConversation', params={
+        'v': 5.124,
+        'peer_id': peer_id,
+        'access_token': access_token
+    }).json()
+    time.sleep(1)
+
+# выключаем уведомления
+def disable_notifications(peer_id, access_token):
+    r = requests.get('https://api.vk.com/method/account.setSilenceMode', params={
+        'v': 5.124,
+        'peer_id': peer_id,
+        'access_token': access_token,
+        'time': -1,
+        'sound': 0
+    }).json()
+    time.sleep(1)
+
 # спамим
 def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для перезалива)
     cycles = 4
@@ -263,6 +284,11 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
         acc_type = 'cb_vkusno'
         access_token = str(data.loc[(data['acc_id'] == ACC_ID) & (data['type'] == acc_type)]['token'].values.item())
         vk_username = data.loc[(data['acc_id'] == ACC_ID) & (data['type'] == acc_type)]['username'].values.item()
+
+        # выключаем уведомления
+        cb_id_list = [-140876144, -190262367, -132834409, -71729358, -66678575]
+        for peer_id in cb_id_list:
+            disable_notifications(peer_id=peer_id, access_token=access_token)
 
         address = read_name()
         if access_token != 'nan' and address != None:
