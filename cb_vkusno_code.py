@@ -17,9 +17,8 @@ def send_message(text, peer_id, access_token, username):
         'message': text,
         'random_id': random_id
     }).json()
-    delete_history(peer_id=peer_id, access_token=access_token)
     if 'error' in r and r['error']['error_code'] == 14:
-        time.sleep(10*60)
+        time.sleep(60*60)
 
 # откладка через группу вк
 def send_debug(text):
@@ -46,7 +45,7 @@ def send_anon_cb1(address, access_token, vk_username):
         send_message(msg, peer_id, access_token, vk_username)
         time.sleep(2)
 
-    time.sleep(5)
+    time.sleep(60)
 
 # чат №2
 def send_anon_cb2(address, access_token, vk_username):
@@ -62,11 +61,15 @@ def send_anon_cb2(address, access_token, vk_username):
         send_message(msg, peer_id, access_token, vk_username)
         time.sleep(2)
 
-    time.sleep(5)
+    time.sleep(60)
 
 # чат №3
 def send_anon_cb3(address, access_token, vk_username):
     peer_id = -132834409
+
+    send_message('!стоп', peer_id, access_token, vk_username)
+    time.sleep(2)
+
     r = requests.get('https://api.vk.com/method/messages.getHistory', params={
         'v': 5.124,
         'peer_id': peer_id,
@@ -74,11 +77,10 @@ def send_anon_cb3(address, access_token, vk_username):
         'count': 1
     }).json()
     message_text = r['response']['items'][0]['text']
-    if 'возраст' in message_text:
-        send_message('16', peer_id, access_token, vk_username)
+    if 'response' in r:
+        if 'возраст' in message_text:
+            send_message('18', peer_id, access_token, vk_username)
 
-    send_message('!стоп', peer_id, access_token, vk_username)
-    time.sleep(2)
     send_message('!новый', peer_id, access_token, vk_username)
     time.sleep(2)
 
@@ -88,7 +90,7 @@ def send_anon_cb3(address, access_token, vk_username):
         send_message(msg, peer_id, access_token, vk_username)
         time.sleep(2)
 
-    time.sleep(5)
+    time.sleep(60)
 
 # чат №4
 def send_anon_cb4(address, access_token, vk_username):
@@ -104,7 +106,7 @@ def send_anon_cb4(address, access_token, vk_username):
         send_message(msg, peer_id, access_token, vk_username)
         time.sleep(2)
 
-    time.sleep(5)
+    time.sleep(60)
 
 # чат №5
 def send_anon_cb5(address, access_token, vk_username):
@@ -120,7 +122,7 @@ def send_anon_cb5(address, access_token, vk_username):
         send_message(msg, peer_id, access_token, vk_username)
         time.sleep(2)
 
-    time.sleep(5)
+    time.sleep(60)
 
 # чекаем бан ботов
 def is_all_banned(access_token, vk_username):
@@ -244,26 +246,6 @@ def acc_check(access_token):
     else:
         return True
 
-# удаляем историю сообщение
-def delete_history(peer_id, access_token):
-    r = requests.get('https://api.vk.com/method/messages.deleteConversation', params={
-        'v': 5.124,
-        'peer_id': peer_id,
-        'access_token': access_token
-    }).json()
-    time.sleep(1)
-
-# выключаем уведомления
-def disable_notifications(peer_id, access_token):
-    r = requests.get('https://api.vk.com/method/account.setSilenceMode', params={
-        'v': 5.124,
-        'peer_id': peer_id,
-        'access_token': access_token,
-        'time': -1,
-        'sound': 0
-    }).json()
-    time.sleep(1)
-
 # спамим
 def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для перезалива)
     cycles = 4
@@ -285,11 +267,6 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
         access_token = str(data.loc[(data['acc_id'] == ACC_ID) & (data['type'] == acc_type)]['token'].values.item())
         vk_username = data.loc[(data['acc_id'] == ACC_ID) & (data['type'] == acc_type)]['username'].values.item()
 
-        # выключаем уведомления
-        cb_id_list = [-140876144, -190262367, -132834409, -71729358, -66678575]
-        for peer_id in cb_id_list:
-            disable_notifications(peer_id=peer_id, access_token=access_token)
-
         address = read_name()
         if access_token != 'nan' and address != None:
             if not acc_check(access_token=access_token):
@@ -305,10 +282,10 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
                         cb3_ban = ban_data['cb3']
                         cb4_ban = ban_data['cb4']
                         cb5_ban = ban_data['cb5']
-                        time_to_sleep = random.randint(15, 25)
+                        time_to_sleep = random.randint(15, 30)
                         time.sleep(60 * time_to_sleep)
                     else:
-                        if not cb1_ban:
+                        if not cb1_ban and random_rate(20):
                             send_anon_cb1(address, access_token, vk_username) # Анонимный чат ВКонтакте
                         if not cb2_ban:
                             send_anon_cb2(address, access_token, vk_username) # Анонимный чат бот
@@ -325,7 +302,6 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
                     print(f'ERROR:\n-----\n{str(e)}\n-----')
         else:
             print('Токена нет, сплю...')
-            cycles = 0
             time.sleep(5*60)
 
 # мэйн функтион
