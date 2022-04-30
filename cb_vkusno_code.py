@@ -8,9 +8,9 @@ import pandas
 import os
 
 # отправка сообщения
-def send_message(text, peer_id, access_token, username):
+def send_message(text, peer_id, access_token, username, proxies):
     random_id = random.randint(100000, 1000000000)
-    r = requests.get('https://api.vk.com/method/messages.send', params={
+    r = requests.get('https://api.vk.com/method/messages.send', proxies=proxies, params={
         'v': 5.124,
         'peer_id': peer_id,
         'access_token': access_token,
@@ -32,43 +32,43 @@ def send_debug(text):
     }).json()
 
 # чат №1
-def send_anon_cb1(address, access_token, vk_username):
+def send_anon_cb1(address, access_token, vk_username, proxies):
     peer_id = -140876144
-    send_message('!c', peer_id, access_token, vk_username)
+    send_message('!c', peer_id, access_token, vk_username, proxies)
     time.sleep(2)
-    send_message('!н', peer_id, access_token, vk_username)
+    send_message('!н', peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
     # делаем сообщение и пишем его
     msg = gen_cb_msgs(address)
-    send_message(msg, peer_id, access_token, vk_username)
+    send_message(msg, peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
     time.sleep(10)
 
 # чат №2
-def send_anon_cb2(address, access_token, vk_username):
+def send_anon_cb2(address, access_token, vk_username, proxies):
     peer_id = -190262367
-    send_message('!стоп', peer_id, access_token, vk_username)
+    send_message('!стоп', peer_id, access_token, vk_username, proxies)
     time.sleep(2)
-    send_message('!поиск', peer_id, access_token, vk_username)
+    send_message('!поиск', peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
     # делаем сообщение и пишем его
     msg = gen_cb_msgs(address)
-    send_message(msg, peer_id, access_token, vk_username)
+    send_message(msg, peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
     time.sleep(10)
 
 # чат №3
-def send_anon_cb3(address, access_token, vk_username):
+def send_anon_cb3(address, access_token, vk_username, proxies):
     peer_id = -132834409
 
-    send_message('!стоп', peer_id, access_token, vk_username)
+    send_message('!стоп', peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
-    r = requests.get('https://api.vk.com/method/messages.getHistory', params={
+    r = requests.get('https://api.vk.com/method/messages.getHistory', proxies=proxies, params={
         'v': 5.124,
         'peer_id': peer_id,
         'access_token': access_token,
@@ -77,51 +77,51 @@ def send_anon_cb3(address, access_token, vk_username):
     message_text = r['response']['items'][0]['text']
     if 'response' in r:
         if 'возраст' in message_text:
-            send_message('18', peer_id, access_token, vk_username)
+            send_message('18', peer_id, access_token, vk_username, proxies)
 
-    send_message('!новый', peer_id, access_token, vk_username)
+    send_message('!новый', peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
     # делаем сообщение и пишем его
     msg = gen_cb_msgs(address)
-    send_message(msg, peer_id, access_token, vk_username)
+    send_message(msg, peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
     time.sleep(10)
 
 
 # чат №4
-def send_anon_cb4(address, access_token, vk_username):
+def send_anon_cb4(address, access_token, vk_username, proxies):
     peer_id = -71729358
-    send_message('!стоп', peer_id, access_token, vk_username)
+    send_message('!стоп', peer_id, access_token, vk_username, proxies)
     time.sleep(2)
-    send_message('!мж', peer_id, access_token, vk_username)
+    send_message('!мж', peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
     # делаем сообщение и пишем его
     msg = gen_cb_msgs(address)
-    send_message(msg, peer_id, access_token, vk_username)
+    send_message(msg, peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
     time.sleep(10)
 
 # чат №5
-def send_anon_cb5(address, access_token, vk_username):
+def send_anon_cb5(address, access_token, vk_username, proxies):
     peer_id = -66678575
-    send_message('!стоп', peer_id, access_token, vk_username)
+    send_message('!стоп', peer_id, access_token, vk_username, proxies)
     time.sleep(2)
-    send_message('!мж', peer_id, access_token, vk_username)
+    send_message('!мж', peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
     # делаем сообщение и пишем его
     msg = gen_cb_msgs(address)
-    send_message(msg, peer_id, access_token, vk_username)
+    send_message(msg, peer_id, access_token, vk_username, proxies)
     time.sleep(2)
 
     time.sleep(10)
 
 # чекаем бан ботов
-def is_all_banned(access_token, vk_username):
+def is_all_banned(access_token, vk_username, proxies):
     data = {'cb1': False, 'cb2': False, 'cb3': False, 'cb4': False, 'cb5': False}
     cb1 = True
     cb2 = False
@@ -130,7 +130,7 @@ def is_all_banned(access_token, vk_username):
     cb5 = False
 
     # первый бот
-    r = requests.get('https://api.vk.com/method/messages.getHistory', params={
+    r = requests.get('https://api.vk.com/method/messages.getHistory', proxies=proxies, params={
         'v': 5.124,
         'peer_id': -140876144,
         'access_token': access_token,
@@ -144,7 +144,7 @@ def is_all_banned(access_token, vk_username):
     data['cb1'] = cb1
 
     # второй бот
-    b_request = requests.get('https://api.vk.com/method/groups.getById', params={
+    b_request = requests.get('https://api.vk.com/method/groups.getById', proxies=proxies, params={
         'v': 5.124,
         'group_id': 190262367,
         'access_token': access_token,
@@ -155,7 +155,7 @@ def is_all_banned(access_token, vk_username):
     data['cb2'] = cb2
 
     # третий бот
-    c_request = requests.get('https://api.vk.com/method/messages.getHistory', params={
+    c_request = requests.get('https://api.vk.com/method/messages.getHistory', proxies=proxies, params={
         'v': 5.124,
         'peer_id': -132834409,
         'access_token': access_token,
@@ -167,7 +167,7 @@ def is_all_banned(access_token, vk_username):
     data['cb3'] = cb3
 
     # четвертый бот
-    d_request = requests.get('https://api.vk.com/method/messages.getHistory', params={
+    d_request = requests.get('https://api.vk.com/method/messages.getHistory', proxies=proxies, params={
         'v': 5.124,
         'peer_id': -71729358,
         'access_token': access_token,
@@ -179,7 +179,7 @@ def is_all_banned(access_token, vk_username):
     data['cb4'] = cb4
 
     # пятый бот
-    e_request = requests.get('https://api.vk.com/method/messages.getHistory', params={
+    e_request = requests.get('https://api.vk.com/method/messages.getHistory', proxies=proxies, params={
         'v': 5.124,
         'peer_id': -66678575,
         'access_token': access_token,
@@ -232,8 +232,8 @@ def gen_cb_msgs(address):
     return msg
 
 # чекаем акк
-def acc_check(access_token):
-    r = requests.get('https://api.vk.com/method/users.get', params={
+def acc_check(access_token, proxies):
+    r = requests.get('https://api.vk.com/method/users.get', proxies=proxies, params={
         'v': 5.124,
         'access_token': access_token
     }).json()
@@ -243,7 +243,9 @@ def acc_check(access_token):
         return True
 
 # спамим
-def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для перезалива)
+def chatbot_spam(ACC_ID):
+    proxies = {"https": "http://Ad93n6:mJqJxa@194.67.213.244:9718"}
+
     cycles = 4
     cb1_ban = False
     cb2_ban = False
@@ -265,14 +267,14 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
 
         address = read_name()
         if access_token != 'nan' and address != None:
-            if not acc_check(access_token=access_token):
+            if not acc_check(access_token=access_token, proxies=proxies):
                 send_debug(vk_username + '\n' + 'похоже, что акк отлетел')
                 time.sleep(15 * 60)
             else:
                 try:
                     if cycles > 6:
                         cycles = 0
-                        ban_data = is_all_banned(access_token=access_token, vk_username=vk_username)
+                        ban_data = is_all_banned(access_token=access_token, vk_username=vk_username, proxies=proxies)
                         cb1_ban = ban_data['cb1']
                         cb2_ban = ban_data['cb2']
                         cb3_ban = ban_data['cb3']
@@ -282,15 +284,15 @@ def chatbot_spam(ACC_ID): # обязательно АСC_ID = 3 (для пере
                         time.sleep(60 * time_to_sleep)
                     else:
                         if not cb1_ban and random_rate(20):
-                            send_anon_cb1(address, access_token, vk_username) # Анонимный чат ВКонтакте
+                            send_anon_cb1(address, access_token, vk_username, proxies=proxies) # Анонимный чат ВКонтакте
                         if not cb2_ban:
-                            send_anon_cb2(address, access_token, vk_username) # Анонимный чат бот
+                            send_anon_cb2(address, access_token, vk_username, proxies=proxies) # Анонимный чат бот
                         if not cb3_ban:
-                            send_anon_cb3(address, access_token, vk_username) # Студентки | Чат
+                            send_anon_cb3(address, access_token, vk_username, proxies=proxies) # Студентки | Чат
                         if not cb4_ban and random_rate(50):
-                            send_anon_cb4(address, access_token, vk_username) # ПОЗОРシ
+                            send_anon_cb4(address, access_token, vk_username, proxies=proxies) # ПОЗОРシ
                         if not cb5_ban and random_rate(50):
-                            send_anon_cb5(address, access_token, vk_username) # Овсянка, сэр!
+                            send_anon_cb5(address, access_token, vk_username, proxies=proxies) # Овсянка, сэр!
                         cycles += 1
 
                 except Exception as e:
