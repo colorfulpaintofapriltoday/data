@@ -1,10 +1,10 @@
 type,acc_id,login_pass,token,vk_id,username
-cb_vkusno,0,faniryanjara@gmail.com:AnjaFah1611@,8f87a0cea2e7b0c1182425ff1c5245df99c2af83dd4845583cebc2b47aab0cbba31bf365f9e24d41221e7,624969986,Faniry Anjara
-cb_vkusno,1,falsum_error@web.de:wasser45,17cf4cb50c5580a6911874c83ede79e0058a62fa64e268908ddb6a5ef755249907695662c7980e4957297,481741854,Tobi Hgg
-cb_vkusno,2,ersanland@hotmail.com:Ek8851077,cd9c160af31e6e872a4d765cc0fdc9431a1691957aef705872f98f0b90fa274b149352d3f677259e04b86,147864860,Ersan Kara
-cb_vkusno,3,ernestbenjamin19@gmail.com:@Victory007,c9ea61fe69a4ddb4c077170d52c09bb2e0c9af83f3cd9c4f6b19fc953f458294040fc3322f459ee6a3c82,598218712,Ernest Benjamin
-cb_vkusno,4,erneska8@gmail.com:rugile123,03611265ec7e3571b0533f231b631711677430a5e40b066ed1ede6a5990b84c177e7b4c6f1539f3d7e4bd,644670986,Sck Darogas
-cb_vkusno,5,erayerdemliproduction@gmail.com:1331Ee33*,6b0f7cf3dfd8ee149a5428e718d250a9f0dde061b6aaf631705cf2d77e781f3ff078a4ca44111738020d7,379932335,Eray Erdemli
+cb_vkusno,0,
+cb_vkusno,1,
+cb_vkusno,2,
+cb_vkusno,3,
+cb_vkusno,4,
+cb_vkusno,5,
 cb_vkusno,6,
 cb_vkusno,7,
 cb_vkusno,8,
@@ -29,8 +29,8 @@ cb_vkusno,26,
 cb_vkusno,27,
 cb_vkusno,28,
 cb_vkusno,29,
-skysmart,0,shohrat.a93@gmail.com:overlord93,3ffa410d704fabfec1e33b2753b373e59cab75740ca555527aa33a4e99d18a3a3960d4c1e5245766bb7b3,284143315,Shohrat Annamammedow
-skysmart,1,shasvanth1547@gmail.com:11547Sha@,c839c2fc21a6f63330d9234c32825fe68910d9a48ce223bf191107d8307a7f26e3f3c75cf4b3ffd925c2c,609849774,Shasvanth Shas
+skysmart,0,
+skysmart,1,
 skysmart,2,
 skysmart,3,
 skysmart,4,
