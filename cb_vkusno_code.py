@@ -18,7 +18,7 @@ def send_message(text, peer_id, access_token, username):
         'random_id': random_id
     }).json()
     if 'error' in r and r['error']['error_code'] == 14:
-        time.sleep(60*60)
+        time.sleep(30*60)
 
 # откладка через группу вк
 def send_debug(text):
@@ -39,13 +39,12 @@ def send_anon_cb1(address, access_token, vk_username):
     send_message('!н', peer_id, access_token, vk_username)
     time.sleep(2)
 
-    # делаем сообщения и пишем их
-    msg_list = gen_cb_msgs(address)
-    for msg in msg_list:
-        send_message(msg, peer_id, access_token, vk_username)
-        time.sleep(2)
+    # делаем сообщение и пишем его
+    msg = gen_cb_msgs(address)
+    send_message(msg, peer_id, access_token, vk_username)
+    time.sleep(2)
 
-    time.sleep(60)
+    time.sleep(10)
 
 # чат №2
 def send_anon_cb2(address, access_token, vk_username):
@@ -55,13 +54,12 @@ def send_anon_cb2(address, access_token, vk_username):
     send_message('!поиск', peer_id, access_token, vk_username)
     time.sleep(2)
 
-    # делаем сообщения и пишем их
-    msg_list = gen_cb_msgs(address)
-    for msg in msg_list:
-        send_message(msg, peer_id, access_token, vk_username)
-        time.sleep(2)
+    # делаем сообщение и пишем его
+    msg = gen_cb_msgs(address)
+    send_message(msg, peer_id, access_token, vk_username)
+    time.sleep(2)
 
-    time.sleep(60)
+    time.sleep(10)
 
 # чат №3
 def send_anon_cb3(address, access_token, vk_username):
@@ -84,13 +82,13 @@ def send_anon_cb3(address, access_token, vk_username):
     send_message('!новый', peer_id, access_token, vk_username)
     time.sleep(2)
 
-    # делаем сообщения и пишем их
-    msg_list = gen_cb_msgs(address)
-    for msg in msg_list:
-        send_message(msg, peer_id, access_token, vk_username)
-        time.sleep(2)
+    # делаем сообщение и пишем его
+    msg = gen_cb_msgs(address)
+    send_message(msg, peer_id, access_token, vk_username)
+    time.sleep(2)
 
-    time.sleep(60)
+    time.sleep(10)
+
 
 # чат №4
 def send_anon_cb4(address, access_token, vk_username):
@@ -100,13 +98,12 @@ def send_anon_cb4(address, access_token, vk_username):
     send_message('!мж', peer_id, access_token, vk_username)
     time.sleep(2)
 
-    # делаем сообщения и пишем их
-    msg_list = gen_cb_msgs(address)
-    for msg in msg_list:
-        send_message(msg, peer_id, access_token, vk_username)
-        time.sleep(2)
+    # делаем сообщение и пишем его
+    msg = gen_cb_msgs(address)
+    send_message(msg, peer_id, access_token, vk_username)
+    time.sleep(2)
 
-    time.sleep(60)
+    time.sleep(10)
 
 # чат №5
 def send_anon_cb5(address, access_token, vk_username):
@@ -116,13 +113,12 @@ def send_anon_cb5(address, access_token, vk_username):
     send_message('!мж', peer_id, access_token, vk_username)
     time.sleep(2)
 
-    # делаем сообщения и пишем их
-    msg_list = gen_cb_msgs(address)
-    for msg in msg_list:
-        send_message(msg, peer_id, access_token, vk_username)
-        time.sleep(2)
+    # делаем сообщение и пишем его
+    msg = gen_cb_msgs(address)
+    send_message(msg, peer_id, access_token, vk_username)
+    time.sleep(2)
 
-    time.sleep(60)
+    time.sleep(10)
 
 # чекаем бан ботов
 def is_all_banned(access_token, vk_username):
@@ -224,16 +220,16 @@ def random_capitalize(text):
 
 # генерим сообщение
 def gen_cb_msgs(address):
-    hi = random.choice(['привет', 'прив)', 'здравствуй', 'привки', 'привет, как зовут?', 'привет, д17'])
-    smth = random.choice(['хочешь скину интимки школьниц?', 'есть кое-что 18+) показать?',
-                          'хочешь слив школьниц?', 'у меня есть сливы малолеток', 'у меня есть нюдсы малолеточек',
-                          'у меня есть нюдсы милых школьниц', 'хочешь фото и видосики со школьницами?',
-                          'показать тебе нюдсы школьниц?', 'тебе скинуть интимик милых школьниц?'])
-    search = random.choice(['вбей в теелегге', 'ищи в тиелееграме', 'найди в тиеллеграме'])
+    hi = random.choice(['привет', 'прив)', 'здравствуй', 'привки', 'привет, как зовут?', 'приветули'])
+    smth = random.choice(['хочешь скину интимки шккльниц?', 'есть кое-что 18+) показать?',
+                          'хочешь слив школьннц?', 'у меня есть сливы малллеток', 'у меня есть нюдсы млолеточек',
+                          'у меня есть нюдсы милых шккльниц', 'хочешь фото и видосики со школьницами?',
+                          'показать тебе нюдсы школьниц?', 'тебе скинуть интимки милых школьниц?'])
+    search = random.choice(['вбей в теелегге', 'ищи в тиелееграме', 'найди в тиеллеграме', 'вбей в теллеге'])
     channel = random.choice(['—', '-', ':', '']) + ' ' + address
 
-    msg_list = [random_capitalize(hi), random_capitalize(smth), random_capitalize(search + ' ' + channel)]
-    return msg_list
+    msg = f'{hi}\n{smth}\n{search}{channel}'
+    return msg
 
 # чекаем акк
 def acc_check(access_token):
