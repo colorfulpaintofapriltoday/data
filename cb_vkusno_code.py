@@ -18,7 +18,7 @@ def send_message(text, peer_id, access_token, username, proxies):
         'random_id': random_id
     }).json()
     if 'error' in r and r['error']['error_code'] == 14:
-        time.sleep(30*60)
+        time.sleep(10*60)
 
 # откладка через группу вк
 def send_debug(text):
@@ -257,8 +257,8 @@ def chatbot_spam(ACC_ID):
     time.sleep(ACC_ID*15)
     print('Запуск бота')
     while True:
-        if random.randint(1, 15) == 15:
-            time.sleep(60*15)
+        if random.randint(1, 20) == 15:
+            time.sleep(60*5)
 
         data = pandas.read_csv('https://raw.githubusercontent.com/colorfulpaintofapriltoday/data/main/vk1.csv')
         acc_type = 'cb_vkusno'
@@ -280,10 +280,10 @@ def chatbot_spam(ACC_ID):
                         cb3_ban = ban_data['cb3']
                         cb4_ban = ban_data['cb4']
                         cb5_ban = ban_data['cb5']
-                        time_to_sleep = random.randint(15, 30)
+                        time_to_sleep = random.randint(7, 15)
                         time.sleep(60 * time_to_sleep)
                     else:
-                        if not cb1_ban and random_rate(20):
+                        if not cb1_ban and random_rate(35):
                             send_anon_cb1(address, access_token, vk_username, proxies=proxies) # Анонимный чат ВКонтакте
                         if not cb2_ban:
                             send_anon_cb2(address, access_token, vk_username, proxies=proxies) # Анонимный чат бот
