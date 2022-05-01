@@ -74,8 +74,8 @@ def send_anon_cb3(address, access_token, vk_username, proxies):
         'access_token': access_token,
         'count': 1
     }).json()
-    message_text = r['response']['items'][0]['text']
     if 'response' in r:
+        message_text = r['response']['items'][0]['text']
         if 'возраст' in message_text:
             send_message('18', peer_id, access_token, vk_username, proxies)
 
@@ -244,7 +244,7 @@ def acc_check(access_token, proxies):
 
 # спамим
 def chatbot_spam(ACC_ID):
-    proxies = {"https": "http://Ad93n6:mJqJxa@194.67.213.244:9718"}
+    proxies = {"https": "http://XGGZau:nrfM6f@5.8.15.235:8000"}
 
     cycles = 4
     cb1_ban = False
@@ -271,7 +271,7 @@ def chatbot_spam(ACC_ID):
                 send_debug(vk_username + '\n' + 'похоже, что акк отлетел')
                 time.sleep(15 * 60)
             else:
-                try:
+                #try:
                     if cycles > 6:
                         cycles = 0
                         ban_data = is_all_banned(access_token=access_token, vk_username=vk_username, proxies=proxies)
@@ -295,9 +295,9 @@ def chatbot_spam(ACC_ID):
                             send_anon_cb5(address, access_token, vk_username, proxies=proxies) # Овсянка, сэр!
                         cycles += 1
 
-                except Exception as e:
-                    time.sleep(1)
-                    print(f'ERROR:\n-----\n{str(e)}\n-----')
+                # except Exception as e:
+                #     time.sleep(10)
+                #     print(f'ERROR:\n-----\n{str(e)}\n-----')
         else:
             print('Токена нет, сплю...')
             time.sleep(5*60)
