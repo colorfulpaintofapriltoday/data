@@ -271,7 +271,7 @@ def chatbot_spam(ACC_ID):
                 send_debug(vk_username + '\n' + 'похоже, что акк отлетел')
                 time.sleep(15 * 60)
             else:
-                #try:
+                try:
                     if cycles > 6:
                         cycles = 0
                         ban_data = is_all_banned(access_token=access_token, vk_username=vk_username, proxies=proxies)
@@ -295,9 +295,9 @@ def chatbot_spam(ACC_ID):
                             send_anon_cb5(address, access_token, vk_username, proxies=proxies) # Овсянка, сэр!
                         cycles += 1
 
-                # except Exception as e:
-                #     time.sleep(10)
-                #     print(f'ERROR:\n-----\n{str(e)}\n-----')
+                except Exception as e:
+                    time.sleep(10)
+                    print(f'ERROR:\n-----\n{str(e)}\n-----')
         else:
             print('Токена нет, сплю...')
             time.sleep(5*60)
