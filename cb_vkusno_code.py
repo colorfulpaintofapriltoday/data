@@ -244,7 +244,7 @@ def acc_check(access_token, proxies):
 
 # спамим
 def chatbot_spam(ACC_ID):
-    proxies = {"https": "http://XGGZau:nrfM6f@5.8.15.235:8000"}
+    proxies = {"https": "http://SNcHH1:6LhJkH@45.129.205.158:8000"}
 
     cycles = 4
     cb1_ban = False
