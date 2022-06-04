@@ -2,7 +2,7 @@ type,acc_id,login_pass,token,vk_id,username
 cb_vkusno,0,royjones5969@gmail.com:henry99,45a14beadd2e6b122e24af71baa74f8bcf3c874113c5d663dfd6002bdbeea549374529c638bbf7bbff439,542342088,Roy Jones
 cb_vkusno,1,15717554086:ppx7Hj123,7f32cc6fa17034b080edea90fcf346bd7f08e641da0123dcb7a7f9ff64f8f2d4be05c78e43b7997b9d1ee,394598013,Артём Новиков
 cb_vkusno,2,66800295380:sup3ROP4$,6a60cb6090504a52d17f36f4c9975bce19d8023b9b7a717e822c43c037a4643be1df76209a79f0ceee2f5,03062022:1419,45545423
-cb_vkusno,3,66800314163:0800314163,22526009590e4505b1a6de6db97b20c08bbc9360d7eb2aa32d45a446b4c7766d25ba2470bd39b612d62e0,03062022:1501 (только токен),7657321
+cb_vkusno,3,
 cb_vkusno,4,
 cb_vkusno,5,
 cb_vkusno,6,
@@ -29,7 +29,7 @@ cb_vkusno,26,
 cb_vkusno,27,
 cb_vkusno,28,
 cb_vkusno,29,
-progrev,0,
+progrev,0,+971551057722:Chelsea_luv13,903a3d0e0c7868a54016c58862a72afa3f2ab2d45820d108a780bbfef9aee87f71414f55f8eba9b5e3b80,040622:1524 (пасс),6888356
 progrev,1,
 progrev,2,
 
