@@ -1,5 +1,6 @@
 name,token,address,data1,data2,data3,data4,data5
-tg_autoanswer000,token,address,8773319,4511eb5000d3f498c2f5145ef3aa0b4b,123
+bot1,token,address,8773319,4511eb5000d3f498c2f5145ef3aa0b4b,bot1
+bot2,token,address,16741400,cc55076bbde3f5daf8aeccc3a08c1f18,bot2
 tg_autoanswer,token,address,17718426,61bb9f3f879ed38ccb575896b47f78c8,https://telegra.ph/3-10-07-25
 tg_t_namechanger,token,address,9679144,71ebb63019049941d73a8f2a0240c68f
 tg_leave_channels,token,address,15751509,4f0cb369e40de9e5c732d852d7ec93ff
