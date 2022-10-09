@@ -1,8 +1,8 @@
-name,token,address,data1,data2,data3,data4,data5
+name,token,address,data1,data2,data3,data4,data5,data6,data7
 bot1,token,address,8773319,4511eb5000d3f498c2f5145ef3aa0b4b,bot1
 bot2,token,address,16741400,cc55076bbde3f5daf8aeccc3a08c1f18,bot2
 bot3,token,address,12778502,122b578f7186d270ab7a029e65d3a4c5,bot3
-tg_autoanswer,token,address,17718426,61bb9f3f879ed38ccb575896b47f78c8,https://telegra.ph/3-10-07-25
+tg_autoanswer,token,address,17718426,61bb9f3f879ed38ccb575896b47f78c8,https://telegra.ph/3-10-07-25,195.64.101.231,8000,TAW0r2,aZ1N3n
 tg_t_namechanger,token,address,9679144,71ebb63019049941d73a8f2a0240c68f
 tg_leave_channels,token,address,15751509,4f0cb369e40de9e5c732d852d7ec93ff
 tg_traff_nc,token,address,17718907,751ffbe6046c8732645a688ced7358b8
