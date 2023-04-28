@@ -1,1 +1,1 @@
-redir url
+https://yandex.ru/
