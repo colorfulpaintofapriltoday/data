@@ -1,1 +1,1 @@
-reg url
+https://web.telegram.org/
